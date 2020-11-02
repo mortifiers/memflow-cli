@@ -266,6 +266,8 @@ async fn main() -> Result<()> {
 
     let _ = CombinedLogger::init(loggers);
 
+    log_panics::init();
+
     // instantiate pid file
     let _pid_file = PidFile::new(
         &config

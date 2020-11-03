@@ -1,4 +1,4 @@
-use serde_derive::*;
+use serde::*;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub enum Message {

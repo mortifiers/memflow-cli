@@ -1,4 +1,4 @@
-use serde_derive::*;
+use serde::*;
 
 use memflow::PhysicalAddress;
 

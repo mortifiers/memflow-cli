@@ -26,7 +26,7 @@ use tokio::net::{TcpListener, UnixListener};
 use tokio_serde::formats::*;
 use tokio_util::codec::{FramedRead, FramedWrite, LengthDelimitedCodec};
 
-use serde_derive::Deserialize;
+use serde::Deserialize;
 
 /// Spawns a TCP server and listens for incoming connections.
 /// The TCP server accept framed json messages and dispatches them to the individual command handlers.

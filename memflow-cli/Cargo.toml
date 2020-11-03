@@ -25,8 +25,7 @@ tokio-util = { version = "0.4", features = ["full"] }
 tokio-serde = "0.6"
 bytes = "0.5"
 futures = "0.3.0"
-serde = "1.0"
-serde_derive = "1.0"
+serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 time = "0.1"
 

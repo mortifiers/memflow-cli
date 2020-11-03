@@ -111,7 +111,7 @@ async fn connect_tcp(addr: &str) -> Result<FramedStream> {
 }
 
 async fn connect_uds(addr: &str) -> Result<FramedStream> {
-    println!("trying to open connection to {}", addr);
+    info!("trying to open connection to {}", addr);
     let socket = UnixStream::connect(addr)
         .await
         .map_err(|_| Error::Other("unable to connect to udp socket"))?;
@@ -168,7 +168,7 @@ impl DaemonConnector {
             .map_err(|_| Error::Other("unable to get phys_mem metadata from daemon"))?;
 
         Ok(Self {
-            addr: String::new(),
+            addr: addr.to_owned(),
             conn_id: conn_id.to_string(),
 
             runtime: rt,
@@ -179,6 +179,7 @@ impl DaemonConnector {
     }
 }
 
+// TODO: bugged
 impl Clone for DaemonConnector {
     fn clone(&self) -> Self {
         DaemonConnector::new(&self.addr, &self.conn_id).unwrap()

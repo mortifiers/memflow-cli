@@ -1,6 +1,6 @@
 use serde::*;
 
-use memflow::PhysicalAddress;
+use memflow::types::PhysicalAddress;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub enum Message {

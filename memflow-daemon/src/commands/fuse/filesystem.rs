@@ -12,10 +12,10 @@ use std::time::{Duration, Instant};
 
 use log::info;
 
+use memflow::mem::PhysicalMemory;
+
 use fuse_mt::*;
 use time::*;
-
-use memflow::mem::phys_mem::PhysicalMemory;
 
 pub type ChildrenList = Vec<Arc<Box<dyn FileSystemEntry>>>;
 

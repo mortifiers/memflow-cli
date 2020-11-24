@@ -39,7 +39,7 @@ pub struct PhysicalMemoryRead {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PhysicalMemoryMetadata {
-    pub metadata: memflow::PhysicalMemoryMetadata,
+    pub metadata: memflow::mem::PhysicalMemoryMetadata,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default)]

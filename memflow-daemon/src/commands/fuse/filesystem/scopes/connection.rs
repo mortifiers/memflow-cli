@@ -4,7 +4,7 @@ use crate::state::KernelHandle;
 
 use std::sync::{Arc, Mutex};
 
-use memflow::*;
+use memflow::mem::PhysicalMemory;
 
 // TODO: block storage?
 pub struct PhysicalDumpFile {

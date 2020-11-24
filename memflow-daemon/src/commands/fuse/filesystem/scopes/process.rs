@@ -11,7 +11,7 @@ use minidump_writer::{
 
 use memflow::mem::VirtualMemory;
 use memflow::types::size;
-use memflow_win32::*;
+use memflow_win32::prelude::v1::*;
 
 use std::cell::RefCell;
 

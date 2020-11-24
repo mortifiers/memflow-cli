@@ -12,7 +12,7 @@ use crate::state::KernelHandle;
 
 use std::sync::{Arc, Mutex};
 
-use memflow_win32::{Win32ModuleInfo, Win32Process, Win32ProcessInfo};
+use memflow_win32::prelude::{Win32ModuleInfo, Win32Process, Win32ProcessInfo};
 
 pub struct ConnectionScope {
     kernel: Arc<Mutex<KernelHandle>>,

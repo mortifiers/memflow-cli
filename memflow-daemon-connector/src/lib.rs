@@ -1,4 +1,4 @@
-use log::{error, info};
+use log::{error, info, Level};
 use url::Url;
 
 use futures::prelude::*;
@@ -8,9 +8,9 @@ use tokio_serde::formats::*;
 use tokio_serde::{formats::Json, SymmetricallyFramed};
 use tokio_util::codec::{FramedRead, FramedWrite, LengthDelimitedCodec};
 
-use memflow::*;
+use memflow::prelude::v1::*;
 use memflow_daemon::{request, response};
-use memflow_derive::connector;
+use memflow::derive::connector;
 
 // framed udp read/write pairs
 type FramedUdsRequestWriter = SymmetricallyFramed<
@@ -387,8 +387,13 @@ impl PhysicalMemory for DaemonConnector {
 }
 
 /// Creates a new Qemu Procfs Connector instance.
-#[connector(name = "daemon")]
-pub fn create_connector(args: &ConnectorArgs) -> Result<DaemonConnector> {
+#[connector(name = "daemon", ty = "DaemonConnector")]
+pub fn create_connector(log_level: Level, args: &ConnectorArgs) -> Result<DaemonConnector> {
+    simple_logger::SimpleLogger::new()
+        .with_level(log_level.to_level_filter())
+        .init()
+        .ok();
+
     let addr = args
         .get("host")
         .or_else(|| args.get_default())

@@ -6,8 +6,8 @@ use tokio::sync::{Mutex, MutexGuard};
 use lazy_static::lazy_static;
 use uuid::Uuid;
 
-use memflow::*;
-use memflow_win32::*;
+use memflow::prelude::v1::*;
+use memflow_win32::prelude::v1::*;
 
 lazy_static! {
     pub static ref STATE: Mutex<State> = Mutex::new(State::new());
@@ -122,9 +122,9 @@ pub type CachedConnectorInstance =
 
 pub type CachedTranslate = CachedVirtualTranslate<DirectTranslate, TimedCacheValidator>;
 
-pub type CachedWin32Kernel = memflow_win32::Kernel<CachedConnectorInstance, CachedTranslate>;
+pub type CachedWin32Kernel = memflow_win32::win32::Kernel<CachedConnectorInstance, CachedTranslate>;
 
-pub type CachedWin32Process = memflow_win32::Win32Process<
+pub type CachedWin32Process = memflow_win32::win32::Win32Process<
     VirtualDMA<CachedConnectorInstance, CachedTranslate, Win32VirtualTranslate>,
 >;
 

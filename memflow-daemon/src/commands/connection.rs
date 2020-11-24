@@ -7,7 +7,8 @@ use crate::state::{KernelHandle, STATE};
 use futures::Sink;
 use std::marker::Unpin;
 
-use memflow::*;
+use memflow::prelude::v1::*;
+use memflow_win32::win32::Kernel;
 
 fn create_connector(msg: &request::Connect) -> Result<ConnectorInstance> {
     let args = match &msg.args {
@@ -16,7 +17,7 @@ fn create_connector(msg: &request::Connect) -> Result<ConnectorInstance> {
         None => ConnectorArgs::default(),
     };
 
-    let inventory = unsafe { ConnectorInventory::try_new() }.map_err(Error::from)?;
+    let inventory = unsafe { ConnectorInventory::scan() };
     unsafe { inventory.create_connector(&msg.name, &args) }.map_err(Error::from)
 }
 
@@ -33,7 +34,7 @@ pub async fn new<S: Sink<response::Message> + Unpin>(
             send_log_info(frame, "connector created").await?;
 
             // initialize kernel
-            let kernel = memflow_win32::Kernel::builder(conn)
+            let kernel = Kernel::builder(conn)
                 .build_default_caches()
                 .build()
                 .map_err(|_| Error::Connector("unable to find kernel"))?;

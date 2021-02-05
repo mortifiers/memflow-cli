@@ -16,7 +16,7 @@ fn create_connector(msg: &request::Connect) -> Result<ConnectorInstance> {
         None => ConnectorArgs::default(),
     };
 
-    let inventory = unsafe { ConnectorInventory::scan() };
+    let inventory = unsafe { ConnectorInventory::try_new() }.map_err(Error::from)?;
     unsafe { inventory.create_connector(&msg.name, &args) }.map_err(Error::from)
 }
 
